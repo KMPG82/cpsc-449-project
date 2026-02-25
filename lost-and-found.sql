@@ -19,11 +19,24 @@ CREATE TABLE ITEM (
     Description VARCHAR(250) NOT NULL,
     Title VARCHAR(50) NOT NULL, 
     Type VARCHAR(20) NOT NULL,
+    Category VARCHAR(20) NOT NULL,
     Status VARCHAR(20) NOT NULL,
-	User_id INT NOT NULL,
     Date DATE NOT NULL,
     Img BLOB NOT NULL,
+    User_id INT NOT NULL,
 
     PRIMARY KEY (Item_id),
     FOREIGN KEY (User_id) REFERENCES USER (User_id)
+);
+
+CREATE TABLE MESSAGE (
+    Message_id INT AUTO_INCREMENT,
+    Inserted_at TIMESTAMP NOT NULL,
+    Content VARCHAR(250) NOT NULL,
+	Sender_id INT NOT NULL,
+    Recipient_id INT NOT NULL,
+
+    PRIMARY KEY (Message_id),
+    FOREIGN KEY (Sender_id) REFERENCES USER (User_id),
+    FOREIGN KEY (Recipient_id) REFERENCES USER (User_id)
 );
