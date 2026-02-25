@@ -21,7 +21,9 @@
       
         <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Register</button>
 
-        <a href="./index.html">Have an account?</a>
+        <a href="http://localhost/cpsc-449-project/index.php">
+          <p class="mt-1">Already have an account?</p>
+        </a>      
       </form>    
     </div>
     

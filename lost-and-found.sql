@@ -33,10 +33,10 @@ CREATE TABLE MESSAGE (
     Message_id INT AUTO_INCREMENT,
     Inserted_at TIMESTAMP NOT NULL,
     Content VARCHAR(250) NOT NULL,
-	Sender_id INT NOT NULL,
-    Recipient_id INT NOT NULL,
+	Sender_email VARCHAR(50) NOT NULL,
+    Recipient_email VARCHAR(50) NOT NULL,
 
     PRIMARY KEY (Message_id),
-    FOREIGN KEY (Sender_id) REFERENCES USER (User_id),
-    FOREIGN KEY (Recipient_id) REFERENCES USER (User_id)
+    FOREIGN KEY (Sender_email) REFERENCES USER (Email),
+    FOREIGN KEY (Recipient_email) REFERENCES USER (Email)
 );

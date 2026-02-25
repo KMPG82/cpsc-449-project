@@ -6,22 +6,23 @@
   </head>
 
   <body class="text-center h-100 d-flex justify-content-center">
-
     <div class="container justify-content-center d-flex flex-column align-items-center">
       <img class="img-fluid w-25 rounded-circle mb-2" src="https://media.istockphoto.com/id/1730149969/vector/lost-items-icon-lost-and-found.jpg?s=612x612&w=0&k=20&c=yt1AzDWvu1LDAwOok1tIJOcHQsaRYnAS4flWuTB4nk0=" alt="">
 
       <form class="w-25">
         <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             
-        <label>Email address</label>
-        <input type="email" class="form-control mb-1" placeholder="Email address" required>
+        <label>Email</label>
+        <input type="email" class="form-control mb-1" placeholder="Email" required>
 
         <label>Password</label>
         <input type="password" class="form-control" placeholder="Password" required>
       
         <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Login</button>
 
-        <a href="./registration.html">Don't have an account?</a>
+        <a href="http://localhost/cpsc-449-project/registration.php">
+          <p class="mt-1">Don't have an account?</p>
+        </a>
       </form>    
     </div>
     

@@ -3,10 +3,8 @@ session_start();
 include("connect.php");
 
 $user_email = "email2@email.com";
-$other_user = $_GET['Sender_email'];
 
-
-$sql = "select * from message where (Recipient_email='$user_email' and Sender_email='$other_user') or (Sender_email='$user_email' and Recipient_email='$other_user') order by Inserted_at ASC;";
+$sql = "select * from message where Recipient_email='$user_email' group by Sender_email DESC;";
 
 $recieved_messages = $conn->query($sql);
 ?>
@@ -39,23 +37,18 @@ $recieved_messages = $conn->query($sql);
     <body class=""> 
         <h1 class="display-2 text-center">Inbox</h1>
 
-        <div class="w-100 d-flex justify-content-end">
-            <?php 
-                echo ("<a href='./create_message.php?Sender_email=" . $other_user . "'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>");
-            ?>
-        </div>
-
         <?php while($row = $recieved_messages->fetch_assoc()) {
             ?>
-            <div class="d-flex flex-column border-bottom border-top">
-                <p class="fw-bold ms-2 mt-2"><?php echo 'From: ' . $row['Sender_email']; ?></p>
+            <a href="http://localhost/cpsc-449-project/view_messages.php?Sender_email=<?php echo $row['Sender_email']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
+                <div class="d-flex flex-column border-bottom border-top">
+                    <p class="fw-bold ms-2 mt-2"><?php echo 'From: ' . $row['Sender_email']; ?></p>
 
-                <p class="ms-2">
-                    <?php echo $row['Content']; ?>           
-                </p>     
-
-
-            </div>
+                    <p class="ms-2">
+                        <?php echo $row['Content']; ?>           
+                    </p>     
+                </div>
+            </a>
+            
         <?php } ?>
     </body>
 
