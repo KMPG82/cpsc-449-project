@@ -2,11 +2,12 @@
 session_start();
 include("connect.php");
 
-$user_email = "email2@email.com";
+$user_email = "email1@email.com";
 $other_user = $_GET['Sender_email'];
+$item_id = $_GET['Item_id'];
 
 
-$sql = "select * from message where (Recipient_email='$user_email' and Sender_email='$other_user') or (Sender_email='$user_email' and Recipient_email='$other_user') order by Inserted_at ASC;";
+$sql = "select * from message where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) order by Inserted_at ASC;";
 
 $recieved_messages = $conn->query($sql);
 ?>
@@ -22,14 +23,15 @@ $recieved_messages = $conn->query($sql);
     <nav class="navbar bg-body-tertiary">
             <a class="navbar-brand ms-2" href="#">L&F</a>
             
-                <ul class="navbar-nav me-auto flex-row d-flex">
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link active" href="#">Inbox</a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav me-auto flex-row d-flex">
+                <li class="nav-item me-2">
+                    <a class="nav-link active" href="http://localhost/cpsc-449-project/view_conversations.php">Inbox</a>
+                </li>
+
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="http://localhost/cpsc-449-project/view_items.php">View Items</a>
+                </li>
+            </ul>
 
             <a href="http://localhost/cpsc-449-project/logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
@@ -37,31 +39,41 @@ $recieved_messages = $conn->query($sql);
     </nav>
 
     <body class=""> 
-        <h1 class="display-2 text-center">Inbox</h1>
+        <h1 class="text-center">
+            <?php echo 'Conversation with ' . $other_user . ' for item ID ' . $item_id; ?>
+        </h1>
 
         <div class="w-100 d-flex justify-content-end">
-            <?php 
-                echo ("<a href='./create_message.php?Sender_email=" . $other_user . "'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>");
-            ?>
+            <?php echo ("<a href='./create_message.php?Sender_email=" . $other_user . "&Item_id=" . $item_id . "'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
         </div>
 
         <?php while($row = $recieved_messages->fetch_assoc()) {
             ?>
-            <div class="d-flex flex-column border-bottom border-top">
-                <p class="fw-bold ms-2 mt-2"><?php echo 'From: ' . $row['Sender_email']; ?></p>
+            <div class="d-flex flex-column">
+                <?php if($row['Sender_email'] == $user_email) {
+                    ?>
+                    <div class="card w-25 ms-auto mb-2 me-2">
+                        <div class="card-body text-break">
+                            <?php echo $row['Content']; ?>
+                        </div>
+                    </div>
+                <?php } else { ?> 
+    
+                    <div class="card w-25 ms-2 mb-2">
+                        <div class="card-body text-break">
+                            <?php echo $row['Content']; ?>
+                        </div>
 
-                <p class="ms-2">
-                    <?php echo $row['Content']; ?>           
-                </p>     
-
-
+                    </div> 
+                <?php } ?>     
             </div>
+               
         <?php } ?>
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
-<?php
 
+<?php
 $conn->close();
 ?>

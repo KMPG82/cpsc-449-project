@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
     <head>
-        <title>Create Message</title>
+        <title>View Items</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
@@ -11,11 +11,11 @@
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="#">Inbox</a>
+                        <a class="nav-link" href="http://localhost/cpsc-449-project/view_conversations.php">Inbox</a>
                     </li>
-
+                    
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="http://localhost/cpsc-449-project/view_items.php">View Items</a>
+                        <a class="nav-link active" href="#">View Items</a>
                     </li>
                 </ul>
 

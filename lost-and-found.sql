@@ -35,8 +35,10 @@ CREATE TABLE MESSAGE (
     Content VARCHAR(250) NOT NULL,
 	Sender_email VARCHAR(50) NOT NULL,
     Recipient_email VARCHAR(50) NOT NULL,
+    Item_id INT NOT NULL,
 
     PRIMARY KEY (Message_id),
     FOREIGN KEY (Sender_email) REFERENCES USER (Email),
-    FOREIGN KEY (Recipient_email) REFERENCES USER (Email)
+    FOREIGN KEY (Recipient_email) REFERENCES USER (Email),
+    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
 );
