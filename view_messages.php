@@ -2,10 +2,9 @@
 session_start();
 include("connect.php");
 
-$user_email = "email1@email.com";
-$other_user = $_GET['Sender_email'];
+$user_email = "user1@email.com";
+$other_user = $_GET['Other_user'];
 $item_id = $_GET['Item_id'];
-
 
 $sql = "select * from message where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) order by Inserted_at ASC;";
 
@@ -15,7 +14,7 @@ $recieved_messages = $conn->query($sql);
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
     <head>
-        <title>Inbox</title>
+        <title>Messages</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
@@ -40,11 +39,11 @@ $recieved_messages = $conn->query($sql);
 
     <body class=""> 
         <h1 class="text-center">
-            <?php echo 'Conversation with ' . $other_user . ' for item ID ' . $item_id; ?>
+            <?php echo 'Conversation with '.$other_user.' for item#'.$item_id; ?>
         </h1>
 
         <div class="w-100 d-flex justify-content-end">
-            <?php echo ("<a href='./create_message.php?Sender_email=" . $other_user . "&Item_id=" . $item_id . "'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
+            <?php echo ("<a href='./create_message.php?Recipient=".$other_user."&Item_id=".$item_id."'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
         </div>
 
         <?php while($row = $recieved_messages->fetch_assoc()) {

@@ -2,7 +2,7 @@
 session_start();
 include("connect.php");
 
-$user_email = "email1@email.com";
+$user_email = "user1@email.com";
 
 //note: utilized chatGPT to debug and help write the following query
 $sql = "
@@ -63,10 +63,10 @@ $recieved_messages = $conn->query($sql);
             ?>
             <?php if($row['Sender_email'] == $user_email) {
                 ?>
-                <a href="http://localhost/cpsc-449-project/view_messages.php?Sender_email=<?php echo $row['Recipient_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
+                <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Recipient_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
                     <div class="d-flex flex-column border-bottom border-top">
                         <p class="fw-bold ms-2 mt-2">
-                            <?php echo 'Conversation with ' . $row['Recipient_email'] . ' for item ID ' . $row['Item_id']; ?>
+                            <?php echo 'Conversation with '.$row['Recipient_email'].' for item ID '.$row['Item_id']; ?>
                         </p>
 
                         <p class="ms-2">
@@ -75,10 +75,10 @@ $recieved_messages = $conn->query($sql);
                     </div>
                 </a>
                 <?php } else { ?> 
-                <a href="http://localhost/cpsc-449-project/view_messages.php?Sender_email=<?php echo $row['Sender_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
+                <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Sender_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
                     <div class="d-flex flex-column border-bottom border-top">
                         <p class="fw-bold ms-2 mt-2">
-                            <?php echo 'Conversation with ' . $row['Sender_email'] . ' for item ID ' . $row['Item_id']; ?>
+                            <?php echo 'Conversation with '.$row['Sender_email'].' for item#'.$row['Item_id']; ?>
                         </p>
 
                         <p class="ms-2">
@@ -92,7 +92,7 @@ $recieved_messages = $conn->query($sql);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
-<?php
 
+<?php
 $conn->close();
 ?>
