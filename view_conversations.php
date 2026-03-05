@@ -4,27 +4,16 @@ include("connect.php");
 
 $user_email = "user1@email.com";
 
-//note: utilized chatGPT to debug and help write the following query
 $sql = "
 select *
 from message
-join (
-    select 
-        Item_id,
-        case
-            when Sender_email = '$user_email' THEN Recipient_email
-            else Sender_email
-        end as other_user,
-        max(Inserted_at) as most_recent
-    from message
-    WHERE Sender_email = '$user_email' OR Recipient_email = '$user_email'
-    GROUP BY Item_id, other_user
-) sub_query
-ON ((message.Sender_email = '$user_email' and message.Recipient_email = sub_query.other_user)
-     OR (message.Recipient_email = '$user_email' and message.Sender_email = sub_query.other_user))
-and message.Item_id = sub_query.Item_id
-and message.Inserted_at = sub_query.most_recent
-order by message.Inserted_at desc;
+where Sender_email='$user_email' or Recipient_email='$user_email'
+group by Item_id,
+case
+    when Sender_email='$user_email' then Recipient_email
+    else Sender_email
+end
+order by Inserted_at DESC;
 ";
 
 $recieved_messages = $conn->query($sql);
@@ -64,26 +53,18 @@ $recieved_messages = $conn->query($sql);
             <?php if($row['Sender_email'] == $user_email) {
                 ?>
                 <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Recipient_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
-                    <div class="d-flex flex-column border-bottom border-top">
-                        <p class="fw-bold ms-2 mt-2">
-                            <?php echo 'Conversation with '.$row['Recipient_email'].' for item ID '.$row['Item_id']; ?>
-                        </p>
-
-                        <p class="ms-2">
-                            <?php echo $row['Content']; ?>           
-                        </p>     
+                    <div class="d-flex flex-column border-bottom border-top p-4">
+                        <h1 class="ms-2 mt-2 mb-2">
+                            <?php echo 'Conversation with '.$row['Recipient_email'].' for item#'.$row['Item_id']; ?>
+                        </h1>
                     </div>
                 </a>
                 <?php } else { ?> 
                 <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Sender_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
-                    <div class="d-flex flex-column border-bottom border-top">
-                        <p class="fw-bold ms-2 mt-2">
+                    <div class="d-flex flex-column border-bottom border-top p-4">
+                        <h1 class="ms-2 mt-2 mb-2">
                             <?php echo 'Conversation with '.$row['Sender_email'].' for item#'.$row['Item_id']; ?>
-                        </p>
-
-                        <p class="ms-2">
-                            <?php echo $row['Content']; ?>           
-                        </p>     
+                        </h1>
                     </div>
                 </a>
             <?php } ?>   
