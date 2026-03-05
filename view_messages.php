@@ -6,7 +6,9 @@ $user_email = "user1@email.com";
 $other_user = $_GET['Other_user'];
 $item_id = $_GET['Item_id'];
 
-$sql = "select * from message where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) order by Inserted_at ASC;";
+$sql = "select * from message 
+where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) 
+order by Inserted_at ASC;";
 
 $recieved_messages = $conn->query($sql);
 ?>
