@@ -2,7 +2,7 @@
 session_start();
 include("connect.php");
 
-$user_email = "user1@email.com";
+$user_email = $_SESSION["Email"];
 $recipient = $_GET['Recipient'];
 $item_id = $_GET['Item_id'];
 ?>
@@ -20,21 +20,21 @@ $item_id = $_GET['Item_id'];
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="http://localhost/cpsc-449-project/view_conversations.php">Inbox</a>
+                        <a class="nav-link active" href="view_conversations.php">Inbox</a>
                     </li>
 
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="http://localhost/cpsc-449-project/view_items.php">View Items</a>
+                        <a class="nav-link" href="view_items.php">View Items</a>
                     </li>
                 </ul>
 
-            <a href="http://localhost/cpsc-449-project/logout.php">
+            <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
             </a>
     </nav>
 
     <body> 
-        <form action="http://localhost/cpsc-449-project/send_message.php?Recipient=<?php echo $recipient; ?>&Item_id=<?php echo $item_id; ?>" method='post' class="h-50">
+        <form action="send_message.php?Recipient=<?php echo $recipient; ?>&Item_id=<?php echo $item_id; ?>" method='post' class="h-50">
             <h1 class="mb-2 ms-2"><?php echo 'Sending message to '.$recipient.' about item#'.$item_id; ?></h1>
             
             <textarea required class="form-control w-75 ms-2" rows="5" name="message" placeholder="Type your message here..."></textarea>

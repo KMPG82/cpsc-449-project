@@ -2,7 +2,7 @@
 session_start();
 include("connect.php");
 
-$user_email = "user1@email.com";
+$user_email = $_SESSION["Email"];
 $other_user = $_GET['Other_user'];
 $item_id = $_GET['Item_id'];
 
@@ -26,15 +26,15 @@ $recieved_messages = $conn->query($sql);
             
             <ul class="navbar-nav me-auto flex-row d-flex">
                 <li class="nav-item me-2">
-                    <a class="nav-link active" href="http://localhost/cpsc-449-project/view_conversations.php">Inbox</a>
+                    <a class="nav-link active" href="view_conversations.php">Inbox</a>
                 </li>
 
                 <li class="nav-item me-2">
-                    <a class="nav-link" href="http://localhost/cpsc-449-project/view_items.php">View Items</a>
+                    <a class="nav-link" href="view_items.php">View Items</a>
                 </li>
             </ul>
 
-            <a href="http://localhost/cpsc-449-project/logout.php">
+            <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
             </a>
     </nav>
@@ -45,7 +45,7 @@ $recieved_messages = $conn->query($sql);
         </h1>
 
         <div class="w-100 d-flex justify-content-end">
-            <?php echo ("<a href='./create_message.php?Recipient=".$other_user."&Item_id=".$item_id."'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
+            <?php echo ("<a href='create_message.php?Recipient=".$other_user."&Item_id=".$item_id."'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
         </div>
 
         <?php while($row = $recieved_messages->fetch_assoc()) {
@@ -68,7 +68,6 @@ $recieved_messages = $conn->query($sql);
                     </div> 
                 <?php } ?>     
             </div>
-               
         <?php } ?>
     </body>
 

@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
         // This'll save user info into session, so the app knows this user is logged in
         $_SESSION["Email"] = $row["Email"];
         $_SESSION["Password"] = $row["Password"];
-        $_SESSION["UserID"] = $row["User_id"];
+        $_SESSION["User_id"] = $row["User_id"];
 
         header("Location: view_items.php");
         exit();

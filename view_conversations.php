@@ -2,7 +2,7 @@
 session_start();
 include("connect.php");
 
-$user_email = "user1@email.com";
+$user_email = $_SESSION["Email"];
 
 $sql = "
 select *
@@ -36,11 +36,11 @@ $recieved_messages = $conn->query($sql);
                     </li>
 
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="http://localhost/cpsc-449-project/view_items.php">View Items</a>
+                        <a class="nav-link" href="view_items.php">View Items</a>
                     </li>
                 </ul>
 
-            <a href="http://localhost/cpsc-449-project/logout.php">
+            <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
             </a>
     </nav>
@@ -52,7 +52,7 @@ $recieved_messages = $conn->query($sql);
             ?>
             <?php if($row['Sender_email'] == $user_email) {
                 ?>
-                <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Recipient_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
+                <a href="view_messages.php?Other_user=<?php echo $row['Recipient_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
                     <div class="d-flex flex-column border-bottom border-top p-4">
                         <h1 class="ms-2 mt-2 mb-2">
                             <?php echo 'Conversation with '.$row['Recipient_email'].' for item#'.$row['Item_id']; ?>
@@ -60,7 +60,7 @@ $recieved_messages = $conn->query($sql);
                     </div>
                 </a>
                 <?php } else { ?> 
-                <a href="http://localhost/cpsc-449-project/view_messages.php?Other_user=<?php echo $row['Sender_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
+                <a href="view_messages.php?Other_user=<?php echo $row['Sender_email']; ?>&Item_id=<?php echo $row['Item_id']; ?>" class="link-underline link-underline-opacity-0 link-body-emphasis">
                     <div class="d-flex flex-column border-bottom border-top p-4">
                         <h1 class="ms-2 mt-2 mb-2">
                             <?php echo 'Conversation with '.$row['Sender_email'].' for item#'.$row['Item_id']; ?>

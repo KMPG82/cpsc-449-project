@@ -11,7 +11,7 @@
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="http://localhost/cpsc-449-project/view_conversations.php">Inbox</a>
+                        <a class="nav-link" href="view_conversations.php">Inbox</a>
                     </li>
                     
                     <li class="nav-item me-2">
@@ -19,7 +19,7 @@
                     </li>
                 </ul>
 
-            <a href="http://localhost/cpsc-449-project/logout.php">
+            <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
             </a>
     </nav>
