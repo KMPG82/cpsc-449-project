@@ -7,7 +7,7 @@ CREATE TABLE USER (
     User_id INT AUTO_INCREMENT,
     Inserted_at TIMESTAMP NOT NULL,
     Email VARCHAR(50) UNIQUE NOT NULL,
-    Password VARCHAR(50) UNIQUE NOT NULL,
+    Password VARCHAR(50) NOT NULL,
     
     PRIMARY KEY (User_id)
 );

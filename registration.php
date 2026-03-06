@@ -7,15 +7,15 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Firstly, check if this email or password already exists
-    $checkSql = "SELECT * FROM USER WHERE Email = '$email' OR Password = '$password'";
+    // Firstly, check if this email already exists
+    $checkSql = "SELECT * FROM USER WHERE Email = '$email'";
     $checkResult = mysqli_query($conn, $checkSql);
 
     if (mysqli_num_rows($checkResult) > 0) {
         echo '
         <script>
             window.location.href="registration.php";
-            alert("This email or password is already registered.");
+            alert("This email is already registered.");
         </script>
         ';
     } else {
