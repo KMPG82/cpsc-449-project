@@ -39,7 +39,7 @@ $recieved_messages = $conn->query($sql);
             </a>
     </nav>
 
-    <body class=""> 
+    <body> 
         <h1 class="text-center">
             <?php echo 'Conversation with '.$other_user.' for item#'.$item_id; ?>
         </h1>

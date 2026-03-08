@@ -1,3 +1,21 @@
+<?php
+session_start();
+include("connect.php");
+
+$user_email = $_SESSION["Email"];
+$user_id = $_SESSION["User_id"];
+
+$sql = "
+select Item.*, User.Email 
+from Item 
+join User 
+on Item.User_id = User.User_id 
+where Item.Status='Unresolved';
+";
+
+$items = $conn->query($sql);
+?>
+
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
     <head>
@@ -24,9 +42,77 @@
             </a>
     </nav>
 
-    <body class=""> 
+    <body> 
+        <h1 class="display-2 text-center mb-4">The Lost & Found</h1>
+ 
+        <?php while($row = $items->fetch_assoc()) {
+            ?>
+            <div class="border-bottom border-top">
+                <h1 class="display-4 text-center mb-4"><?php echo $row['Title']; ?></h1>
 
+                <div class="d-flex justify-content-evenly text-center text-break">
+                    <div class="w-25 d-flex align-items-center flex-column justify-content-center ms-4">
+                        <img src="<?php echo $row['Img']; ?>" class="img-thumbnail mb-2 mt-2 rounded">   
+                    </div>
+
+                    <div class="w-75 d-flex flex-column">
+                        <div class="d-flex justify-content-evenly w-100">
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Location Lost/Found</b><br>
+                                <p><?php echo $row['Location']; ?></p>
+                            </div>
+
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Type</b><br>
+                                <p><?php echo $row['Type']; ?></p>
+                            </div>
+
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Date Lost/Found</b><br>
+                                <p><?php echo $row['Date']; ?></p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-evenly w-100 mt-2 mb-2">
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Category</b><br>
+                                <p><?php echo $row['Category']; ?></p>
+                            </div>
+
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Status</b><br>
+                                <p><?php echo $row['Status']; ?></p>
+                            </div>
+
+                            <div class="w-100">
+                                <b class="text-decoration-underline">Item#</b><br>
+                                <p><?php echo $row['Item_id']; ?></p>
+                            </div>
+                        </div>
+
+                        <div class="w-100 mt-4">
+                            <b class="text-decoration-underline">Description</b><br>
+                            <p><?php echo $row['Description']; ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex text-center">
+                    <div class="w-100">
+                        <?php
+                        if($row['User_id']!=$user_id) {
+                            echo ("<a href='create_message.php?Recipient=".$row['Email']."&Item_id=".$row['Item_id']."'><button type='button' class='btn btn-info mb-2 me-2'>Send Message</button></a>");
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
+
+<?php
+$conn->close();
+?>

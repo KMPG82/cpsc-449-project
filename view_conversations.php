@@ -45,7 +45,7 @@ $recieved_messages = $conn->query($sql);
             </a>
     </nav>
 
-    <body class=""> 
+    <body> 
         <h1 class="display-2 text-center">Inbox</h1>
 
         <?php while($row = $recieved_messages->fetch_assoc()) {
