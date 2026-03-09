@@ -2,18 +2,7 @@
 session_start();
 include("connect.php");
 
-$user_email = $_SESSION["Email"];
 $user_id = $_SESSION["User_id"];
-
-$sql = "
-select Item.*, User.Email 
-from Item 
-join User 
-on Item.User_id = User.User_id 
-where Item.Status='Unresolved';
-";
-
-$items = $conn->query($sql);
 ?>
 
 <!doctype html>
