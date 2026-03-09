@@ -59,8 +59,8 @@ $conn->close();
       <form class="w-25" method="POST" action="registration.php">
         <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
             
-        <label>Email address</label>
-        <input type="email" name="email" class="form-control mb-1" placeholder="Email address" required>
+        <label>Email</label>
+        <input type="email" name="email" class="form-control mb-1" placeholder="Email" required>
 
         <label>Password</label>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
