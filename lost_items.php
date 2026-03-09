@@ -10,7 +10,7 @@ select Item.*, User.Email
 from Item 
 join User 
 on Item.User_id = User.User_id 
-where Item.Status='Unresolved';
+where Item.Status='Unresolved' and Item.Type='Lost';
 ";
 
 $items = $conn->query($sql);
@@ -33,11 +33,11 @@ $items = $conn->query($sql);
                     </li>
                     
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="#">All Items</a>
+                        <a class="nav-link" href="view_items.php">All Items</a>
                     </li>
 
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="lost_items.php">Lost Items</a>
+                        <a class="nav-link active" href="#">Lost Items</a>
                     </li>
 
                     <li class="nav-item me-2">
@@ -51,7 +51,7 @@ $items = $conn->query($sql);
     </nav>
 
     <body> 
-        <h1 class="display-2 text-center mb-4">The Lost & Found</h1>
+        <h1 class="display-2 text-center mb-4">The Lost</h1>
  
         <?php while($row = $items->fetch_assoc()) {
             ?>
@@ -66,7 +66,7 @@ $items = $conn->query($sql);
                     <div class="w-75 d-flex flex-column">
                         <div class="d-flex justify-content-evenly w-100">
                             <div class="w-100">
-                                <b class="text-decoration-underline">Location Lost/Found</b><br>
+                                <b class="text-decoration-underline">Location Lost</b><br>
                                 <p><?php echo $row['Location']; ?></p>
                             </div>
 
@@ -76,7 +76,7 @@ $items = $conn->query($sql);
                             </div>
 
                             <div class="w-100">
-                                <b class="text-decoration-underline">Date Lost/Found</b><br>
+                                <b class="text-decoration-underline">Date Lost</b><br>
                                 <p><?php echo $row['Date']; ?></p>
                             </div>
                         </div>
