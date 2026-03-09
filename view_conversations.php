@@ -32,11 +32,23 @@ $recieved_messages = $conn->query($sql);
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
+                        <a class="nav-link" href="user_items.php">Your Items</a>
+                    </li>
+
+                    <li class="nav-item me-2">
                         <a class="nav-link active" href="#">Inbox</a>
                     </li>
 
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="view_items.php">View Items</a>
+                        <a class="nav-link" href="view_items.php">All Items</a>
+                    </li>
+
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="lost_items.php">Lost Items</a>
+                    </li>
+
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="found_items.php">Found Items</a>
                     </li>
                 </ul>
 

@@ -19,7 +19,7 @@ $items = $conn->query($sql);
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
     <head>
-        <title>View Items</title>
+        <title>Found Items</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
@@ -28,6 +28,10 @@ $items = $conn->query($sql);
             <a class="navbar-brand ms-2" href="#">L&F</a>
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="user_items.php">Your Items</a>
+                    </li>
+                    
                     <li class="nav-item me-2">
                         <a class="nav-link" href="view_conversations.php">Inbox</a>
                     </li>

@@ -3,14 +3,23 @@ session_start();
 include("connect.php");
 
 $user_email = $_SESSION["Email"];
-$recipient = $_GET['Recipient'];
-$item_id = $_GET['Item_id'];
+$user_id = $_SESSION["User_id"];
+
+$sql = "
+select Item.*, User.Email 
+from Item 
+join User 
+on Item.User_id = User.User_id 
+where Item.Status='Unresolved';
+";
+
+$items = $conn->query($sql);
 ?>
 
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
     <head>
-        <title>Create Message</title>
+        <title>Item Submission</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
@@ -20,19 +29,19 @@ $item_id = $_GET['Item_id'];
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="user_items.php">Your Items</a>
+                        <a class="nav-link active" href="user_items.php">Your Items</a>
+                    </li>
+                    
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="view_conversations.php">Inbox</a>
+                    </li>
+                    
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="view_items.php">All Items</a>
                     </li>
 
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="view_conversations.php">Inbox</a>
-                    </li>
-
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="view_items.php">View Items</a>
-                    </li>
-
-                    <li class="nav-item me-2">
-                        <a class="nav-link " href="lost_items.php">Lost Items</a>
+                        <a class="nav-link" href="lost_items.php">Lost Items</a>
                     </li>
 
                     <li class="nav-item me-2">
@@ -46,14 +55,13 @@ $item_id = $_GET['Item_id'];
     </nav>
 
     <body> 
-        <form action="send_message.php?Recipient=<?php echo $recipient; ?>&Item_id=<?php echo $item_id; ?>" method='post' class="h-50">
-            <h1 class="mb-2 ms-2"><?php echo 'Sending message to '.$recipient.' about item#'.$item_id; ?></h1>
-            
-            <textarea required class="form-control w-75 ms-2" rows="5" name="message" placeholder="Type your message here..."></textarea>
-            
-            <button type="submit" name="send" class="btn btn-primary btn-lg ms-2 mt-2">Send Message</button>
-        </form>
+        <h1 class="display-2 text-center mb-4">Item Submission</h1>
+ 
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
+
+<?php
+$conn->close();
+?>

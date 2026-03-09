@@ -2,16 +2,9 @@
 session_start();
 include("connect.php");
 
-$user_email = $_SESSION["Email"];
 $user_id = $_SESSION["User_id"];
 
-$sql = "
-select Item.*, User.Email 
-from Item 
-join User 
-on Item.User_id = User.User_id 
-where Item.Status='Unresolved';
-";
+$sql = "select * from Item where User_id='$user_id';";
 
 $items = $conn->query($sql);
 ?>
@@ -29,15 +22,15 @@ $items = $conn->query($sql);
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="user_items.php">Your Items</a>
+                        <a class="nav-link active" href="#">Your Items</a>
                     </li>
-                    
+
                     <li class="nav-item me-2">
                         <a class="nav-link" href="view_conversations.php">Inbox</a>
                     </li>
                     
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="#">All Items</a>
+                        <a class="nav-link" href="view_items.php">All Items</a>
                     </li>
 
                     <li class="nav-item me-2">
@@ -106,16 +99,6 @@ $items = $conn->query($sql);
                             <b class="text-decoration-underline">Description</b><br>
                             <p><?php echo $row['Description']; ?></p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="d-flex text-center">
-                    <div class="w-100">
-                        <?php
-                        if($row['User_id']!=$user_id) {
-                            echo ("<a href='create_message.php?Recipient=".$row['Email']."&Item_id=".$row['Item_id']."'><button type='button' class='btn btn-info mb-2 me-2'>Send Message</button></a>");
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
