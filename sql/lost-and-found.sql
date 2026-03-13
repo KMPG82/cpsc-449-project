@@ -7,7 +7,7 @@ CREATE TABLE USER (
     User_id INT AUTO_INCREMENT,
     Inserted_at TIMESTAMP NOT NULL,
     Email VARCHAR(50) UNIQUE NOT NULL,
-    Password VARCHAR(50) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
     
     PRIMARY KEY (User_id)
 );
@@ -22,7 +22,7 @@ CREATE TABLE ITEM (
     Category VARCHAR(20) NOT NULL,
     Status VARCHAR(20) NOT NULL,
     Date DATE NOT NULL,
-    Img VARCHAR(100) NOT NULL,
+    Img VARCHAR(225) NOT NULL,
     User_id INT NOT NULL,
 
     PRIMARY KEY (Item_id),
