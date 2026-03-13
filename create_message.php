@@ -38,6 +38,10 @@ $item_id = $_GET['Item_id'];
                     <li class="nav-item me-2">
                         <a class="nav-link" href="found_items.php">Found Items</a>
                     </li>
+
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="item_submission.php">Create Item</a>
+                    </li>
                 </ul>
 
             <a href="logout.php">
