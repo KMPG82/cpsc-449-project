@@ -1,0 +1,54 @@
+DROP DATABASE IF EXISTS LAF;
+CREATE DATABASE LAF;
+
+USE LAF;
+
+CREATE TABLE USER (
+    User_id INT AUTO_INCREMENT,
+    Inserted_at TIMESTAMP NOT NULL,
+    Email VARCHAR(50) UNIQUE NOT NULL,
+    Password VARCHAR(50) NOT NULL,
+    
+    PRIMARY KEY (User_id)
+);
+
+CREATE TABLE ITEM (
+    Item_id INT AUTO_INCREMENT,
+    Inserted_at TIMESTAMP NOT NULL,
+    Location VARCHAR(50) NOT NULL,
+    Description VARCHAR(250) NOT NULL,
+    Title VARCHAR(50) NOT NULL, 
+    Type VARCHAR(20) NOT NULL,
+    Category VARCHAR(20) NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    Date DATE NOT NULL,
+    Img VARCHAR(100) NOT NULL,
+    User_id INT NOT NULL,
+
+    PRIMARY KEY (Item_id),
+    FOREIGN KEY (User_id) REFERENCES USER (User_id)
+);
+
+CREATE TABLE MESSAGE (
+    Message_id INT AUTO_INCREMENT,
+    Inserted_at TIMESTAMP NOT NULL,
+    Content VARCHAR(250) NOT NULL,
+	Sender_email VARCHAR(50) NOT NULL,
+    Recipient_email VARCHAR(50) NOT NULL,
+    Item_id INT NOT NULL,
+
+    PRIMARY KEY (Message_id),
+    FOREIGN KEY (Sender_email) REFERENCES USER (Email),
+    FOREIGN KEY (Recipient_email) REFERENCES USER (Email),
+    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
+);
+
+-- some dummy data for testing and demos
+INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user1@email.com', 'password1'), (NULL, current_timestamp(), 'user2@email.com', 'password2');
+INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user3@email.com', 'password3'), (NULL, current_timestamp(), 'user4@email.com', 'password4');
+INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user5@email.com', 'password5'), (NULL, current_timestamp(), 'user6@email.com', 'password6');
+INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user7@email.com', 'password7'), (NULL, current_timestamp(), 'user8@email.com', 'password8');
+INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user9@email.com', 'password9'), (NULL, current_timestamp(), 'user10@email.com', 'password10');
+
+INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES (NULL, current_timestamp(), 'Cal State Fullerton', 'Found this wallet.', 'Found Wallet', 'Found', 'Wallet', 'Unresolved', '2026-03-01', './images/wallet1.webp', '1'), (NULL, current_timestamp(), 'Disneyland', 'I lost this purse, pls help', 'Lost Purse', 'Lost', 'Bag', 'Unresolved', '2026-02-20', './images/purse1.webp', '2');
+INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES (NULL, current_timestamp(), 'LA Fitness', 'Lost my phone while working out.', 'Lost Phone', 'Lost', 'Electronics', 'Unresolved', '2026-03-01', './images/phone1.webp', '3'), (NULL, current_timestamp(), 'Universal Studios', 'I found black stone bracelets near one of the rides.', 'Found Bracelets', 'Found', 'Jewelry', 'Unresolved', '2026-02-20', './images/bracelet1.webp', '4');
