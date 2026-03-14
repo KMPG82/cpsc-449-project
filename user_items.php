@@ -2,6 +2,11 @@
 session_start();
 include("connect.php");
 
+if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
+    header("Location: index.php");
+    exit();
+}
+
 $user_id = $_SESSION["User_id"];
 
 $sql = "select * from Item where User_id='$user_id';";

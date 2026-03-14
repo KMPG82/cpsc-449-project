@@ -2,6 +2,11 @@
 session_start();
 include("connect.php");
 
+if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
+    header("Location: index.php");
+    exit();
+}
+
 $user_email = $_SESSION["Email"];
 $recipient = $_GET['Recipient'];
 $item_id = $_GET['Item_id'];
