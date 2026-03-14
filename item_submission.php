@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("connect.php");
-if (!isset($_SESSION["User_id"])) {
+if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
     header("Location: index.php");
     exit();
 }
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
                 <ul class="navbar-nav me-auto flex-row d-flex">
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="user_items.php">Your Items</a>
+                        <a class="nav-link" href="user_items.php">Your Items</a>
                     </li>
                     
                     <li class="nav-item me-2">
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a class="nav-link" href="found_items.php">Found Items</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="item_submission.php">Create Item</a>
+                        <a class="nav-link active" href="item_submission.php">Create Item</a>
                     </li>
                 </ul>
 
