@@ -3,7 +3,7 @@ session_start();
 include("connect.php");
 
 if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
-    header("Location: index.php");
+    header("Location: /cpsc-449-project/index.php");
     exit();
 }
 
