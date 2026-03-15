@@ -43,6 +43,19 @@ CREATE TABLE MESSAGE (
     FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
 );
 
+CREATE TABLE NOTIFICATION (
+    Notification_id INT AUTO_INCREMENT,
+    Inserted_at TIMESTAMP NOT NULL,
+	Sender_email VARCHAR(50) NOT NULL,
+    Recipient_email VARCHAR(50) NOT NULL,
+    Item_id INT NOT NULL,
+
+    PRIMARY KEY (Notification_id),
+    FOREIGN KEY (Sender_email) REFERENCES USER (Email),
+    FOREIGN KEY (Recipient_email) REFERENCES USER (Email),
+    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
+);
+
 -- some dummy data for testing and demos
 INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user1@email.com', 'password1'), (NULL, current_timestamp(), 'user2@email.com', 'password2');
 INSERT INTO `user` (`User_id`, `Inserted_at`, `Email`, `Password`) VALUES (NULL, current_timestamp(), 'user3@email.com', 'password3'), (NULL, current_timestamp(), 'user4@email.com', 'password4');
