@@ -6,6 +6,7 @@ if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
     exit();
 }
 $user_id = $_SESSION["User_id"];
+$user_email = $_SESSION["Email"];
 $message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
@@ -45,6 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Failed to upload image.";
         }
 }
+
+$sql_fetch_notification = "select count(*) from notification where Recipient_email = '$user_email';";
+$notification = $conn->query($sql_fetch_notification);
+
+$row = $notification->fetch_assoc();
+$count = $row['count(*)'];
 ?>
 
 <!doctype html>
@@ -59,30 +66,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav class="navbar bg-body-tertiary">
             <a class="navbar-brand ms-2" href="#">L&F</a>
             
-                <ul class="navbar-nav me-auto flex-row d-flex">
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="user_items.php">Your Items</a>
-                    </li>
-                    
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="view_conversations.php">Inbox</a>
-                    </li>
-                    
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="view_items.php">All Items</a>
-                    </li>
+            <ul class="navbar-nav me-auto flex-row d-flex">
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="user_items.php">Your Items</a>
+                </li>
 
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="lost_items.php">Lost Items</a>
-                    </li>
+                <li class='nav-item me-2'>
+                    <a class='nav-link' href='view_items.php'>All Items</a>
+                </li>
 
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="found_items.php">Found Items</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link active" href="item_submission.php">Create Item</a>
-                    </li>
-                </ul>
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="lost_items.php">Lost Items</a>
+                </li>
+
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="found_items.php">Found Items</a>
+                </li>
+                
+                <li class="nav-item me-2">
+                    <a class="nav-link active" href="item_submission.php">Create Item</a>
+                </li>
+
+                <?php
+                    if ($count > 0) {
+                        echo ("
+                            <li class='nav-item me-2'>
+                                <a class='nav-link' href='view_conversations.php'>Inbox*</a>
+                            </li>");
+                    }
+                    else {
+                        echo ("
+                            <li class='nav-item me-2'>
+                                <a class='nav-link' href='view_conversations.php'>Inbox</a>
+                            </li>
+                        ");
+                }?>
+            </ul>
 
             <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>

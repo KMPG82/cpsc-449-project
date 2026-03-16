@@ -17,15 +17,22 @@ order by Inserted_at ASC;";
 
 $recieved_messages = $conn->query($sql_fetch_messages);
 
-$sql_fetch_notification = "select count(*) from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
-$notification = $conn->query($sql_fetch_notification);
+$sql_fetch_specific_notification = "select count(*) from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
+$notification = $conn->query($sql_fetch_specific_notification);
 
 $row = $notification->fetch_assoc();
-if ($row['count(*)'] > 0) {
+$count = $row['count(*)'];
+if ($count > 0) {
     $sql_delete_notification = "delete from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
 
     $delete_notification = $conn->query($sql_delete_notification);
 }
+
+$sql_fetch_notification = "select count(*) from notification where Recipient_email = '$user_email';";
+$notification = $conn->query($sql_fetch_notification);
+
+$row = $notification->fetch_assoc();
+$count = $row['count(*)'];
 ?>
 
 <!doctype html>
@@ -44,14 +51,10 @@ if ($row['count(*)'] > 0) {
                     <a class="nav-link" href="user_items.php">Your Items</a>
                 </li>
 
-                <li class="nav-item me-2">
-                    <a class="nav-link active" href="view_conversations.php">Inbox</a>
+                <li class='nav-item me-2'>
+                    <a class='nav-link' href='view_items.php'>All Items</a>
                 </li>
 
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="view_items.php">View Items</a>
-                </li>
-                
                 <li class="nav-item me-2">
                     <a class="nav-link" href="lost_items.php">Lost Items</a>
                 </li>
@@ -59,11 +62,26 @@ if ($row['count(*)'] > 0) {
                 <li class="nav-item me-2">
                     <a class="nav-link" href="found_items.php">Found Items</a>
                 </li>
-
+                
                 <li class="nav-item me-2">
                     <a class="nav-link" href="item_submission.php">Create Item</a>
                 </li>
-            </ul>
+
+                <?php
+                    if ($count > 0) {
+                        echo ("
+                            <li class='nav-item me-2'>
+                                <a class='nav-link active' href='view_conversations.php'>Inbox*</a>
+                            </li>");
+                    }
+                    else {
+                        echo ("
+                            <li class='nav-item me-2'>
+                                <a class='nav-link active' href='view_conversations.php'>Inbox</a>
+                            </li>
+                        ");
+                }?>
+            </ul> 
 
             <a href="logout.php">
                 <button class="btn btn-danger me-2" type="button">Logout</button>
