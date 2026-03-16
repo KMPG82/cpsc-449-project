@@ -11,11 +11,21 @@ $user_email = $_SESSION["Email"];
 $other_user = $_GET['Other_user'];
 $item_id = $_GET['Item_id'];
 
-$sql = "select * from message 
+$sql_fetch_messages = "select * from message 
 where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) 
 order by Inserted_at ASC;";
 
-$recieved_messages = $conn->query($sql);
+$recieved_messages = $conn->query($sql_fetch_messages);
+
+$sql_fetch_notification = "select count(*) from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
+$notification = $conn->query($sql_fetch_notification);
+
+$row = $notification->fetch_assoc();
+if ($row['count(*)'] > 0) {
+    $sql_delete_notification = "delete from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
+
+    $delete_notification = $conn->query($sql_delete_notification);
+}
 ?>
 
 <!doctype html>
