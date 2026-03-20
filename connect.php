@@ -5,4 +5,3 @@ $password = "";
 $dbname = "LAF";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-?>

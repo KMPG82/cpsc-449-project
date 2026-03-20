@@ -12,16 +12,18 @@ $other_user = $_GET['Other_user'];
 $item_id = $_GET['Item_id'];
 
 $sql_fetch_messages = "select * from message 
-where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) 
-order by Inserted_at ASC;";
+where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id=$item_id) 
+or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id=$item_id) 
+order by Inserted_at asc;";
 
 $recieved_messages = $conn->query($sql_fetch_messages);
 
 $sql_fetch_specific_notification = "select count(*) from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
-$notification = $conn->query($sql_fetch_specific_notification);
+$notifications = $conn->query($sql_fetch_specific_notification);
 
-$row = $notification->fetch_assoc();
+$row = $notifications->fetch_assoc();
 $count = $row['count(*)'];
+
 if ($count > 0) {
     $sql_delete_notification = "delete from notification where Sender_email = '$other_user' and Recipient_email = '$user_email' and Item_id = '$item_id';";
 
@@ -37,90 +39,92 @@ $count = $row['count(*)'];
 
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="dark">
-    <head>
-        <title>Messages</title>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    </head>
-    
-    <nav class="navbar bg-body-tertiary">
-            <a class="navbar-brand ms-2" href="#">L&F</a>
-            
-            <ul class="navbar-nav me-auto flex-row d-flex">
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="user_items.php">Your Items</a>
-                </li>
+<head>
+    <title>Messages</title>
 
-                <li class='nav-item me-2'>
-                    <a class='nav-link' href='view_items.php'>All Items</a>
-                </li>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
 
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="lost_items.php">Lost Items</a>
-                </li>
+<nav class="navbar bg-body-tertiary">
+    <a class="navbar-brand ms-2" href="#">L&F</a>
 
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="found_items.php">Found Items</a>
-                </li>
-                
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="item_submission.php">Create Item</a>
-                </li>
+    <ul class="navbar-nav me-auto flex-row d-flex">
+        <li class="nav-item me-2">
+            <a class="nav-link" href="user_items.php">Your Items</a>
+        </li>
 
-                <?php
-                    if ($count > 0) {
-                        echo ("
-                            <li class='nav-item me-2'>
-                                <a class='nav-link active' href='view_conversations.php'>Inbox*</a>
-                            </li>");
-                    }
-                    else {
-                        echo ("
-                            <li class='nav-item me-2'>
-                                <a class='nav-link active' href='view_conversations.php'>Inbox</a>
-                            </li>
-                        ");
-                }?>
-            </ul> 
+        <li class='nav-item me-2'>
+            <a class='nav-link' href='view_items.php'>All Items</a>
+        </li>
 
-            <a href="logout.php">
-                <button class="btn btn-danger me-2" type="button">Logout</button>
-            </a>
-    </nav>
+        <li class="nav-item me-2">
+            <a class="nav-link" href="lost_items.php">Lost Items</a>
+        </li>
 
-    <body> 
-        <h1 class="text-center">
-            <?php echo 'Conversation with '.$other_user.' for item#'.$item_id; ?>
-        </h1>
+        <li class="nav-item me-2">
+            <a class="nav-link" href="found_items.php">Found Items</a>
+        </li>
 
-        <div class="w-100 d-flex justify-content-end">
-            <?php echo ("<a href='create_message.php?Recipient=".$other_user."&Item_id=".$item_id."'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
-        </div>
+        <li class="nav-item me-2">
+            <a class="nav-link" href="item_submission.php">Create Item</a>
+        </li>
 
-        <?php while($row = $recieved_messages->fetch_assoc()) {
+        <?php
+        if ($count > 0) {
+            echo ("
+            <li class='nav-item me-2'>
+                <a class='nav-link active' href='view_conversations.php'>Inbox*</a>
+            </li>
+            ");
+        } else {
+            echo ("
+            <li class='nav-item me-2'>
+                <a class='nav-link active' href='view_conversations.php'>Inbox</a>
+            </li>
+            ");
+        } ?>
+    </ul>
+
+    <a href="logout.php">
+        <button class="btn btn-danger me-2" type="button">Logout</button>
+    </a>
+</nav>
+
+<body>
+    <h1 class="text-center">
+        <?php echo 'Conversation with ' . $other_user . ' for item#' . $item_id; ?>
+    </h1>
+
+    <div class="w-100 d-flex justify-content-end">
+        <?php echo ("<a href='create_message.php?Recipient=" . $other_user . "&Item_id=" . $item_id . "'><button type='button' class='btn btn-info mb-2 me-2'>Reply</button></a>"); ?>
+    </div>
+
+    <?php while ($row = $recieved_messages->fetch_assoc()) {
+    ?>
+        <div class="d-flex flex-column">
+            <?php if ($row['Sender_email'] == $user_email) {
             ?>
-            <div class="d-flex flex-column">
-                <?php if($row['Sender_email'] == $user_email) {
-                    ?>
-                    <div class="card w-25 ms-auto mb-2 me-2">
-                        <div class="card-body text-break">
-                            <?php echo $row['Content']; ?>
-                        </div>
+                <div class="card w-25 ms-auto mb-2 me-2">
+                    <div class="card-body text-break">
+                        <?php echo $row['Content']; ?>
                     </div>
-                <?php } else { ?> 
-    
-                    <div class="card w-25 ms-2 mb-2">
-                        <div class="card-body text-break">
-                            <?php echo $row['Content']; ?>
-                        </div>
+                </div>
+            <?php } else { ?>
 
-                    </div> 
-                <?php } ?>     
-            </div>
-        <?php } ?>
-    </body>
+                <div class="card w-25 ms-2 mb-2">
+                    <div class="card-body text-break">
+                        <?php echo $row['Content']; ?>
+                    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 </html>
 
 <?php
