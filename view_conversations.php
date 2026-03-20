@@ -103,16 +103,7 @@ $count = $row['count(*)'];
                         $check_notifaction_row = $check_notifaction->fetch_assoc();
                         $check_count = $check_notifaction_row['count(*)'];
 
-                        $sql_fetch_most_recent_message = "select * from message 
-                            where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id='$item_id') 
-                            or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id='$item_id') 
-                            order by Inserted_at desc
-                            limit 1;";
-
-                        $most_recent_message = $conn->query($sql_fetch_most_recent_message);
-                        $most_recent_message_row = $most_recent_message->fetch_assoc();
-
-                        if ($most_recent_message_row['Sender_email'] == $other_user && $check_count > 0) {
+                        if ($check_count > 0) {
                             echo '[NEW MESSAGE] Conversation with ' . $row['Recipient_email'] . ' for item#' . $row['Item_id'];
                         } else {
                             echo 'Conversation with ' . $row['Recipient_email'] . ' for item#' . $row['Item_id'];
@@ -135,16 +126,7 @@ $count = $row['count(*)'];
                         $check_notifaction_row = $check_notifaction->fetch_assoc();
                         $check_count = $check_notifaction_row['count(*)'];
 
-                        $sql_fetch_most_recent_message = "select * from message 
-                            where (Recipient_email='$user_email' and Sender_email='$other_user' and Item_id='$item_id') 
-                            or (Sender_email='$user_email' and Recipient_email='$other_user' and Item_id='$item_id') 
-                            order by Inserted_at desc
-                            limit 1;";
-
-                        $most_recent_message = $conn->query($sql_fetch_most_recent_message);
-                        $most_recent_message_row = $most_recent_message->fetch_assoc();
-
-                        if ($most_recent_message_row['Sender_email'] == $other_user && $check_count > 0) {
+                        if ($check_count > 0) {
                             echo '[NEW MESSAGE] Conversation with ' . $row['Sender_email'] . ' for item#' . $row['Item_id'];
                         } else {
                             echo 'Conversation with ' . $row['Sender_email'] . ' for item#' . $row['Item_id'];
