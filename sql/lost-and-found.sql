@@ -40,7 +40,7 @@ CREATE TABLE MESSAGE (
     PRIMARY KEY (Message_id),
     FOREIGN KEY (Sender_email) REFERENCES USER (Email),
     FOREIGN KEY (Recipient_email) REFERENCES USER (Email),
-    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
+    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id) ON DELETE CASCADE
 );
 
 CREATE TABLE NOTIFICATION (
@@ -53,7 +53,7 @@ CREATE TABLE NOTIFICATION (
     PRIMARY KEY (Notification_id),
     FOREIGN KEY (Sender_email) REFERENCES USER (Email),
     FOREIGN KEY (Recipient_email) REFERENCES USER (Email),
-    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id)
+    FOREIGN KEY (Item_id) REFERENCES ITEM (Item_id) ON DELETE CASCADE
 );
 
 -- some dummy data for testing and demos

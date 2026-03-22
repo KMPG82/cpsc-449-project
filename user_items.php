@@ -129,6 +129,14 @@ $count = $row['count(*)'];
                     </div>
                 </div>
             </div>
+            <?php
+            echo ("
+            <div class='d-flex justify-content-end me-2 mb-2'>
+                <a href='delete_item.php?item_id=" . $row['Item_id'] . "'>
+                    <button class='btn btn-danger' type='button'>Delete</button>
+                </a>
+            </div>");
+            ?>
         </div>
     <?php } ?>
 </body>
