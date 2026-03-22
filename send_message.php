@@ -23,6 +23,11 @@ if ($row['count(*)'] == 0) {
     $insert_notification = $conn->query($sql_insert_notification);
 }
 
-header("location: view_messages.php?Other_user=" . $recipient . "&Item_id=" . $item_id);
+echo "
+<script>
+alert('Message sent successfully.');
+window.location.href='view_messages.php?Other_user=$recipient&Item_id=$item_id';
+</script>
+";
 
 $conn->close();
