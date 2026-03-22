@@ -130,7 +130,16 @@ $count = $row['count(*)'];
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" name="category" required>
+                <select class="form-select" id="category" name="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Documents">Documents</option>
+                    <option value="Jewelry">Jewelry</option>
+                    <option value="Books">Books</option>
+                    <option value="Bags">Bags</option>
+                    <option value="Wallets">Wallets</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">Location</label>
