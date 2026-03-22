@@ -9,5 +9,11 @@ $conn->query($sql_delete_item);
 
 $conn->close();
 
-header("Location: user_items.php");
+echo "
+<script>
+alert('Item#$item_id deleted successfully.');
+window.location.href='user_items.php';
+</script>
+";
+
 exit();
