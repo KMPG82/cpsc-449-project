@@ -106,13 +106,79 @@ $count = $row['count(*)'];
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <select class="form-select" id="category" name="category" value="<?php echo $item['Category']; ?>" required>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Jewelry">Jewelry</option>
-                    <option value="Books">Books</option>
-                    <option value="Bags">Bags</option>
-                    <option value="Wallets">Wallets</option>
-                    <option value="Other">Other</option>
+                    <?php
+                    if ($item['Category'] == 'Electronics') {
+                        echo ("
+                        <option value='Electronics' selected>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books'>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else if ($item['Category'] == 'Clothing') {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing' selected>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books'>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else if ($item['Category'] == 'Jewelry') {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry' selected>Jewelry</option>
+                        <option value='Books'>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else if ($item['Category'] == 'Books') {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books' selected>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else if ($item['Category'] == 'Bags') {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books'>Books</option>
+                        <option value='Bags' selected>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else if ($item['Category'] == 'Wallets') {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books'>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets' selected>Wallets</option>
+                        <option value='Other'>Other</option>
+                        ");
+                    } else {
+                        echo ("
+                        <option value='Electronics'>Electronics</option>
+                        <option value='Clothing'>Clothing</option>
+                        <option value='Jewelry'>Jewelry</option>
+                        <option value='Books' selected>Books</option>
+                        <option value='Bags'>Bags</option>
+                        <option value='Wallets'>Wallets</option>
+                        <option value='Other' selected>Other</option>
+                        ");
+                    }
+                    ?>
                 </select>
             </div>
             <div class="mb-3">
