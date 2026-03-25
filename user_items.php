@@ -131,9 +131,13 @@ $count = $row['count(*)'];
             </div>
             <?php
             echo ("
-            <div class='d-flex justify-content-end me-2 mb-2'>
+            <div class='d-flex justify-content-end'>
+                <a href='edit_item.php?item_id=" . $row['Item_id'] . "'>
+                    <button class='btn btn-warning m-2' type='button'>Edit</button>
+                </a>
+
                 <a href='delete_item.php?item_id=" . $row['Item_id'] . "'>
-                    <button class='btn btn-danger' type='button'>Delete</button>
+                    <button class='btn btn-danger m-2' type='button'>Delete</button>
                 </a>
             </div>");
             ?>
