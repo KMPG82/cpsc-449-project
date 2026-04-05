@@ -9,14 +9,38 @@ if (!isset($_SESSION["User_id"]) || !isset($_SESSION["Email"])) {
 
 $user_email = $_SESSION["Email"];
 $user_id = $_SESSION["User_id"];
+$categories = ["All", "Electronics", "Clothing", "Jewelry", "Books", "Bags", "Wallets", "Other"];
 
-$sql = "
-select Item.*, User.Email 
-from Item 
-join User 
-on Item.User_id = User.User_id 
-where Item.Status='Unresolved';
-";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $category_index = $_POST["category"];
+    $category = $categories[$category_index];
+
+    if ($category != "All") {
+        $sql = "
+        select Item.*, User.Email 
+        from Item 
+        join User 
+        on Item.User_id = User.User_id 
+        where Item.Status='Unresolved' and Item.Category='$category';
+        ";
+    } else {
+        $sql = "
+        select Item.*, User.Email 
+        from Item 
+        join User 
+        on Item.User_id = User.User_id 
+        where Item.Status='Unresolved';
+        ";
+    }
+} else {
+    $sql = "
+    select Item.*, User.Email 
+    from Item 
+    join User 
+    on Item.User_id = User.User_id 
+    where Item.Status='Unresolved';
+    ";
+}
 
 $items = $conn->query($sql);
 
@@ -83,6 +107,22 @@ $count = $row['count(*)'];
 
 <body>
     <h1 class="display-2 text-center mb-4">The Lost & Found</h1>
+    <form method="post" class="d-flex mb-2 me-2">
+        <div class="ms-auto">
+            <select class="form-select ms-auto" id="category" name="category">
+                <option value=0>All</option>
+                <option value=1>Electronics</option>
+                <option value=2>Clothing</option>
+                <option value=3>Jewelry</option>
+                <option value=4>Books</option>
+                <option value=5>Bags</option>
+                <option value=6>Wallets</option>
+                <option value=7>Other</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary ms-2">Filter</button>
+    </form>
 
     <?php while ($row = $items->fetch_assoc()) {
     ?>
