@@ -110,14 +110,27 @@ $count = $row['count(*)'];
     <form method="post" class="d-flex mb-2 me-2">
         <div class="ms-auto">
             <select class="form-select ms-auto" id="category" name="category">
-                <option value=0>All</option>
-                <option value=1>Electronics</option>
-                <option value=2>Clothing</option>
-                <option value=3>Jewelry</option>
-                <option value=4>Books</option>
-                <option value=5>Bags</option>
-                <option value=6>Wallets</option>
-                <option value=7>Other</option>
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    echo ("<option value=$category_index selected>" . $categories[$category_index] . "</option>");
+                    for ($i = 0; $i < count($categories); $i++) {
+                        if ($i != $category_index) {
+                            echo ("<option value=$i>" . $categories[$i] . "</option>");
+                        }
+                    }
+                } else {
+                    echo ("
+                    <option value=0>All</option>
+                    <option value=1>Electronics</option>
+                    <option value=2>Clothing</option>
+                    <option value=3>Jewelry</option>
+                    <option value=4>Books</option>
+                    <option value=5>Bags</option>
+                    <option value=6>Wallets</option>
+                    <option value=7>Other</option>
+                    ");
+                }
+                ?>
             </select>
         </div>
 
