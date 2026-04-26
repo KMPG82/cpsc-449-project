@@ -82,8 +82,8 @@ INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`
 (NULL, current_timestamp(), 'Mihaylo Hall', 'Lost economics textbook after lecture.', 'Lost Economics Book', 'Lost', 'Books', 'Unresolved', '2026-04-25', './images/book2.jpg', '6');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
-(NULL, current_timestamp(), 'Student Recreation Center', 'Found student ID card near entrance.', 'Found Student ID Card', 'Found', 'ID Card', 'Unresolved', '2026-04-26', './images/id1.jpg', '7'),
-(NULL, current_timestamp(), 'Titan Walk', 'Lost campus ID card between classes.', 'Lost Campus ID', 'Lost', 'ID Card', 'Unresolved', '2026-04-26', './images/id2.jpg', '8');
+(NULL, current_timestamp(), 'Student Recreation Center', 'Found student ID card near entrance.', 'Found Student ID Card', 'Found', 'Other', 'Unresolved', '2026-04-26', './images/id1.jpg', '7'),
+(NULL, current_timestamp(), 'Titan Walk', 'Lost campus ID card between classes.', 'Lost Campus ID', 'Lost', 'Other', 'Unresolved', '2026-04-26', './images/id2.jpg', '8');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
 (NULL, current_timestamp(), 'Visual Arts Building', 'Found silver ring near art studio.', 'Found Silver Ring', 'Found', 'Jewelry', 'Unresolved', '2026-04-27', './images/ring2.jpg', '9'),
