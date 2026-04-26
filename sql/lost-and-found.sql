@@ -75,7 +75,7 @@ INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
 (NULL, current_timestamp(), 'Engineering Building', 'Found a denim jacket left in classroom.', 'Found Denim Jacket', 'Found', 'Clothing', 'Unresolved', '2026-04-22', './images/jacket1.jpg', '3'),
-(NULL, current_timestamp(), 'Titan Gym', 'Lost a white baseball hat during workout.', 'Lost White Hat', 'Lost', 'Accessories', 'Unresolved', '2026-04-23', './images/hat1.jpg', '4');
+(NULL, current_timestamp(), 'Titan Gym', 'Lost a white baseball hat during workout.', 'Lost White Hat', 'Lost', 'Clothing', 'Unresolved', '2026-04-23', './images/hat1.jpg', '4');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
 (NULL, current_timestamp(), 'Pollak Library', 'Found a calculus textbook near the printer.', 'Found Math Book', 'Found', 'Books', 'Unresolved', '2026-04-24', './images/book1.jpg', '5'),
