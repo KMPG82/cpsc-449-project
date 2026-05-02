@@ -7,8 +7,10 @@ $recipient = $_GET['Recipient'];
 $item_id = $_GET['Item_id'];
 $message = $_POST['message'];
 
-$sql_insert_message = "insert into message (Sender_email, Recipient_email, Item_id, Content)
-values ('$user_email','$recipient','$item_id','$message');";
+//$sql_insert_message = "insert into message (Sender_email, Recipient_email, Item_id, Content)
+//values ('$user_email','$recipient','$item_id','$message');";
+$sql_insert_message = "insert into message (Inserted_at, Sender_email, Recipient_email, Item_id, Content)
+values (current_timestamp(), '$user_email','$recipient','$item_id','$message');";
 
 $sent_message = $conn->query($sql_insert_message);
 
@@ -17,8 +19,10 @@ $notification = $conn->query($sql_fetch_notification);
 
 $row = $notification->fetch_assoc();
 if ($row['count(*)'] == 0) {
-    $sql_insert_notification = "insert into notification (Sender_email, Recipient_email, Item_id)
-    values ('$user_email','$recipient','$item_id');";
+    //$sql_insert_notification = "insert into notification (Sender_email, Recipient_email, Item_id)
+    //values ('$user_email','$recipient','$item_id');";
+    $sql_insert_notification = "insert into notification (Inserted_at, Sender_email, Recipient_email, Item_id)
+    values (current_timestamp(), '$user_email','$recipient','$item_id');";
 
     $insert_notification = $conn->query($sql_insert_notification);
 }
