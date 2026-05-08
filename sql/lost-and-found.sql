@@ -72,7 +72,7 @@ INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`
 (NULL, current_timestamp(), 'Universal Studios', 'I found black stone bracelets near one of the rides.', 'Found Bracelets', 'Found', 'Jewelry', 'Unresolved', '2026-02-20', './images/bracelet1.webp', '4');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES 
-(NULL, current_timestamp(), 'Pollak Library', 'I found this near one of the computers in the library, it has a lot of stickers on it.', 'Found This Cool Hydroflask', 'Found', 'Bottles', 'Unresolved', '2026-03-01', './images/hydroflask1.webp', '5'),
+(NULL, current_timestamp(), 'Pollak Library', 'I found this near one of the computers in the library, it has a lot of stickers on it.', 'Found This Cool Hydroflask', 'Found', 'Other', 'Unresolved', '2026-03-01', './images/hydroflask1.webp', '5'),
 (NULL, current_timestamp(), 'Humaitites Building', 'I think I left my iPad in one of the classrooms in the Humaitites building. It has many stickers on it, pls message me if you found it.', 'Lost iPad', 'Lost', 'Electronics', 'Unresolved', '2026-03-08', './images/ipad1.jpg', '6');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES 
@@ -104,12 +104,12 @@ INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`
 (NULL, current_timestamp(), 'Titan Gym', 'Lost black gym bag near locker room.', 'Lost Gym Bag', 'Lost', 'Bags', 'Unresolved', '2026-04-27', './images/gymbag1.jpg', '10');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
-(NULL, current_timestamp(), 'Pollak Library', 'Found a pair of glasses on one of the study tables.', 'Found Glasses', 'Found', 'Accessories', 'Unresolved', '2026-04-28', './images/glasses1.jpg', '1'),
-(NULL, current_timestamp(), 'Titan Student Union', 'Lost my black umbrella near the food area.', 'Lost Black Umbrella', 'Lost', 'Accessories', 'Unresolved', '2026-04-28', './images/umbrella1.webp', '2');
+(NULL, current_timestamp(), 'Pollak Library', 'Found a pair of glasses on one of the study tables.', 'Found Glasses', 'Found', 'Other', 'Unresolved', '2026-04-28', './images/glasses1.jpg', '1'),
+(NULL, current_timestamp(), 'Titan Student Union', 'Lost my black umbrella near the food area.', 'Lost Black Umbrella', 'Lost', 'Other', 'Unresolved', '2026-04-28', './images/umbrella1.webp', '2');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
-(NULL, current_timestamp(), 'McCarthy Hall', 'Found a set of car keys with a Toyota keychain.', 'Found Car Keys', 'Found', 'Keys', 'Unresolved', '2026-04-29', './images/carkeys1.jpg', '3'),
-(NULL, current_timestamp(), 'Titan Gym', 'Lost my yellow water bottle somewhere in the gym.', 'Lost Yellow Water Bottle', 'Lost', 'Bottles', 'Unresolved', '2026-04-29', './images/waterbottle1.jpg', '4');
+(NULL, current_timestamp(), 'McCarthy Hall', 'Found a set of car keys with a Toyota keychain.', 'Found Car Keys', 'Found', 'Other', 'Unresolved', '2026-04-29', './images/carkeys1.jpg', '3'),
+(NULL, current_timestamp(), 'Titan Gym', 'Lost my yellow water bottle somewhere in the gym.', 'Lost Yellow Water Bottle', 'Lost', 'Other', 'Unresolved', '2026-04-29', './images/waterbottle1.jpg', '4');
 
 INSERT INTO `item` (`Item_id`, `Inserted_at`, `Location`, `Description`, `Title`, `Type`, `Category`, `Status`, `Date`, `Img`, `User_id`) VALUES
 (NULL, current_timestamp(), 'Engineering Building', 'Found a graphing calculator left in a classroom.', 'Found Graphing Calculator', 'Found', 'Electronics', 'Unresolved', '2026-04-30', './images/calculator1.jpg', '5'),
